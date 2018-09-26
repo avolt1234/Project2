@@ -18,8 +18,10 @@ def approval(rentalList, age):
 
     appDict = {"EC" : 0, "E": 0, "E10": 10, "T": 13, "M": 17, "AO": 17}
 
+    #List for movies than can be rented
     finalList = []
 
+    #List for movies that cannot be rented
     failList = []
 
     for rental in rentalList.items():
