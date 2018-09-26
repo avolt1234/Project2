@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta as rd
 
 def getAge():
     today = datetime.datetime.today()
-    #date = input("Enter your birthday (mm/dd/YYYY): ")
+    date = input("Enter your birthday (mm/dd/YYYY): ")
     date = "05/12/1991"
     try:
         date = datetime.datetime.strptime(date, "%m/%d/%Y")
@@ -11,10 +11,9 @@ def getAge():
         print("Error in the date")
         return
     age = rd(today, date).years
-    print(age)
-    return age
+    approval(age)
 
-def approval(rentalList, age):
+def approval(age, rentalList=None):
 
     appDict = {"EC" : 0, "E": 0, "E10": 10, "T": 13, "M": 17, "AO": 17}
 
@@ -24,20 +23,45 @@ def approval(rentalList, age):
     #List for movies that cannot be rented
     failList = []
 
-    for rental in rentalList.items():
-        if age >= appDict[rental[1]]:
-            finalList.append(rental)
-        else:
-            failList.append(rental)
+    if rentalList != None:
+        for rental in rentalList.items():
+            if age >= appDict[rental[1]]:
+                finalList.append(rental)
+            else:
+                failList.append(rental)
+    else:
+        while True:
+            quitter = input("Enter Q to end the program or press C to continue: ")
+            if quitter.capitalize() == 'Q':
+                break
+            title = input("Enter the name of the movie: ")
+            rating = input("Enter the rating of the movie (EC, E, E10, T, M, AO): ")
+            try:
+                if age >= appDict[rating.upper()]:
+                    newList = [title, rating]
+                    finalList.append(newList)
+                else:
+                    newList = [title, rating]
+                    failList.append(newList)
+            except Exception as e:
+                print(str(e) + "Enter a valid movie rating!")
 
-    print("The user can rent the following movies: ")
+    print("\nThe user can rent the following movies: ")
     for item in finalList:
         print("Title: " + item[0] + "\t\t\tRating: " + item[1])
+
+    print("\n\nThe user cannot rent the following movies:")
+    for item in failList:
+        print("Title: " + item[0] + "\t\t\tRating: " + item[1])
+
 
 
 if __name__ == '__main__':
 
-    rentalList = {"Tekken": "M", "Top Gun": "T", "TMNT": "E", "Speed": "AO", "Demolition Man": "E10", "Yea": "EC"}
-    age = 9
-    approval(rentalList, age)
-    #getAge()
+    debug = input("Enter Y to test: ")
+    if debug.capitalize() == "Y":
+        rentalList = {"Tekken": "M", "Top Gun": "T", "TMNT": "E", "Speed": "AO", "Demolition Man": "E10", "Yea": "EC"}
+        age = 14
+        approval(rentalList, age)
+    else:
+        getAge()
