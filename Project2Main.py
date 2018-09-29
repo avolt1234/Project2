@@ -62,6 +62,6 @@ if __name__ == '__main__':
     if debug.capitalize() == "Y":
         rentalList = {"Tekken": "M", "Top Gun": "T", "TMNT": "E", "Speed": "AO", "Demolition Man": "E10", "Yea": "EC"}
         age = 14
-        approval(rentalList, age)
+        approval(age, rentalList)
     else:
         getAge()
