@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta as rd
 def getAge():
     today = datetime.datetime.today()
     date = input("Enter your birthday (mm/dd/YYYY): ")
-    date = "05/12/1991"
+    #date = "05/12/1991"
     try:
         date = datetime.datetime.strptime(date, "%m/%d/%Y")
     except:
@@ -31,8 +31,8 @@ def approval(age, rentalList=None):
                 failList.append(rental)
     else:
         while True:
-            quitter = input("Enter Q to end the program or press C to continue: ")
-            if quitter.capitalize() == 'Q':
+            quitter = input("Enter C to checkout or press R to enter another movie: ")
+            if quitter.capitalize() == 'C':
                 break
             title = input("Enter the name of the movie: ")
             rating = input("Enter the rating of the movie (EC, E, E10, T, M, AO): ")
