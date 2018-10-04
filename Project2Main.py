@@ -44,15 +44,17 @@ def approval(age, rentalList=None):
                     newList = [title, rating]
                     failList.append(newList)
             except Exception as e:
-                print(str(e) + "Enter a valid movie rating!")
+                print("The rating " + str(e) + " is invalid, please enter a valid rating")
 
-    print("\nThe user can rent the following movies: ")
-    for item in finalList:
-        print("Title: " + item[0] + "\t\t\tRating: " + item[1])
+    if len(finalList) > 0:
+        print("\nThe user can rent the following movies: ")
+        for item in finalList:
+            print("Title: " + item[0] + "\t\t\tRating: " + item[1])
 
-    print("\n\nThe user cannot rent the following movies:")
-    for item in failList:
-        print("Title: " + item[0] + "\t\t\tRating: " + item[1])
+    if len(failList) != 0:
+        print("\n\nThe user cannot rent the following movies:")
+        for item in failList:
+            print("Title: " + item[0] + "\t\t\tRating: " + item[1])
 
 
 
